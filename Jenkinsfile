@@ -1,4 +1,9 @@
+currentBuild.displayName = "Final_Demo # "+currentBuild.number
 
+   def getDockerTag(){
+        def tag = sh script: 'git rev-parse HEAD', returnStdout: true
+        return tag
+        }
 
 pipeline{
         agent any  
@@ -12,10 +17,6 @@ pipeline{
               stage('Quality Gate Statuc Check'){
 
                agent any {
-                docker {
-                image 'maven'
-                args '-v $HOME/.m2:/root/.m2'
-                }
             }
                   steps{
                       script{
